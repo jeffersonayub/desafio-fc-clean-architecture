@@ -24,43 +24,21 @@ describe('Integration test create product use case', () => {
     await sequelize.close(); 
   });
 
-  it('should create a product type (a)', async () => {
+  it('should create a product', async () => {
 
     const productRepository = new ProductRepository();
     const usecase = new CreateProductUseCase(productRepository)
 
     const input = {
-      name: "Product A",
+      id: "123",
+      name: "Product",
       price: 1,
-      type: "a"
     }
 
     const output = {
       id: expect.any(String),
-      name: "Product A",
+      name: "Product",
       price: 1
-    }
-
-    const result = await usecase.execute(input)
-
-    expect(result).toEqual(output)
-  })
-
-  it('should create a product type (b)', async () => {
-
-    const productRepository = new ProductRepository();
-    const usecase = new CreateProductUseCase(productRepository)
-
-    const input = {
-      name: "Product B",
-      price: 2,
-      type: "b"
-    }
-
-    const output = {
-      id: expect.any(String),
-      name: "Product B",
-      price: 4
     }
 
     const result = await usecase.execute(input)

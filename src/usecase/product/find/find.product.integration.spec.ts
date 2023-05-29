@@ -31,7 +31,7 @@ describe('Integration test find product use case', () => {
     const productRepository = new ProductRepository();
     const usecase = new FindProductUseCase(productRepository)
     
-    const product = new Product("123", "Product A", 15);
+    const product = new Product("123", "Product", 15);
 
     await productRepository.create(product);
 
@@ -41,7 +41,7 @@ describe('Integration test find product use case', () => {
 
     const output = {
       id: "123",
-      name: "Product A",
+      name: "Product",
       price: 15
     }
 
@@ -49,5 +49,5 @@ describe('Integration test find product use case', () => {
 
     expect(result).toEqual(output);
 
-  })
-})
+  });
+});

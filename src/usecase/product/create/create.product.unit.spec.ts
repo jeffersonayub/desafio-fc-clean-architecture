@@ -1,9 +1,9 @@
 import CreateProductUseCase from "./create.product.usecase";
 
 const input = {
+  id: "123",
   name: "Product A",
   price: 5,
-  type: "a"
 }
 
 const MockRepository = () => {
@@ -16,7 +16,7 @@ const MockRepository = () => {
 };
 
 describe("Unit test create product use case", () => {
-  it("should create a product type (a)", async () => {
+  it("should create a product", async () => {
     const productRepository = MockRepository()
     const productCreateUseCase = new CreateProductUseCase(productRepository)
 
@@ -28,20 +28,13 @@ describe("Unit test create product use case", () => {
       price: input.price,
     });
   });
-  
-  it("should create a product type (b)", async () => {
-    const productRepository = MockRepository()
-    const productCreateUseCase = new CreateProductUseCase(productRepository)
 
-    input.type = "b"
-    input.name = "Product B"
-
-    const output = await productCreateUseCase.execute(input)
-
-    expect(output).toEqual({
-      id: expect.any(String),
-      name: input.name,
-      price: 2 * input.price,
-    });
+  it("should throw error when name is missing", async () => {
+    const productRepository = MockRepository();
+    const productCreateUseCase = new CreateProductUseCase(productRepository);
+    input.name="";
+    expect(async () => {
+        await productCreateUseCase.execute(input)
+      }).rejects.toThrow("Name is required");
   });
 });
